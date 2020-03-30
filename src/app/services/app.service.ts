@@ -32,7 +32,6 @@ export class AppService {
             this.cachedData.push(countryData);
           }
         });
-        console.log(this.cachedData);
       }
     );
   }
