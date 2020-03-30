@@ -1,5 +1,5 @@
+import { countries } from './../../data/countries';
 import { Injectable } from '@angular/core';
-import * as countriesData from '../../data/countries.json';
 import { Country } from '../model/country.model';
 
 @Injectable({
@@ -7,11 +7,9 @@ import { Country } from '../model/country.model';
 })
 export class AppService {
 
-  countries: Array<Country> = (countriesData as Country[]).default;
-
   constructor() { }
 
   getCountries() {
-    return this.countries;
+    return countries;
   }
 }
