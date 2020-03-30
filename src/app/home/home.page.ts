@@ -11,11 +11,11 @@ export class HomePage implements OnInit {
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
-    console.table(this.appService.getCountries());
+    this.appService.refreshData();
   }
 
-  getCountries() {
-    return this.appService.getCountries().slice(0, 15);
+  getCountriesData() {
+    return this.appService.getAllData().slice(0, 15);
   }
 
 }
