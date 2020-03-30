@@ -15,7 +15,7 @@ export class HomePage implements OnInit {
   }
 
   getCountries() {
-    return this.appService.getCountries().slice(0, 5);
+    return this.appService.getCountries().slice(0, 15);
   }
 
 }
