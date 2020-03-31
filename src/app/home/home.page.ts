@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../services/app.service';
+import { CountryData } from '../model/country-data.model';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,16 @@ import { AppService } from '../services/app.service';
 })
 export class HomePage implements OnInit {
 
+  countries: Array<CountryData>;
+
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
-    this.appService.refreshData();
+    console.log('Refreshing');
+    this.appService.refreshData(() => {
+      this.countries = this.appService.getTopInfected();
+    });
+    console.log(this.countries);
   }
 
   getTopInfected() {

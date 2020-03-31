@@ -18,7 +18,7 @@ export class AppService {
     return countries;
   }
 
-  refreshData() {
+  refreshData(callback?: any) {
     this.cachedData = [];
     this.http.get<{ string: InfectionData[] }>('https://pomber.github.io/covid19/timeseries.json').subscribe(
       resp => {
@@ -32,6 +32,9 @@ export class AppService {
             this.cachedData.push(countryData);
           }
         });
+        if (callback) {
+          callback();
+        }
       }
     );
   }
@@ -42,7 +45,8 @@ export class AppService {
 
   /* get the latest data for each country */
   getTopInfected(top = 10) {
-    return this.cachedData.sort((a, b) => {
+    console.log('getting infected');
+    return [...this.cachedData].sort((a, b) => {
       return b.latestData.confirmed - a.latestData.confirmed;
     }).slice(0, top);
   }
