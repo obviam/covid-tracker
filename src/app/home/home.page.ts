@@ -11,9 +11,7 @@ export class HomePage implements OnInit {
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
-    console.log('Refreshing...');
     this.appService.refreshData();
-    console.log('Done');
   }
 
   getTopInfected() {
