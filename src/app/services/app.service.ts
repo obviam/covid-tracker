@@ -40,22 +40,19 @@ export class AppService {
   }
 
   getAllData() {
-    return this.cachedData;
+    return [...this.cachedData];
   }
 
   /* get the latest data for each country */
   getInfected(top?: number) {
-    console.log('getting infected');
     return [...this.cachedData].sort((a, b) => {
       return b.latestData.confirmed - a.latestData.confirmed;
     }).slice(0, top ? top : this.cachedData.length);
   }
 
-  getLatestDataForCountry(country: string) {
-
-  }
-
-  getDataForCountry(country: string) {
-
+  filterCountries(query: string) {
+    return [...this.cachedData].sort((a, b) => {
+      return b.latestData.confirmed - a.latestData.confirmed;
+    }).filter(country => country.countryName.toLowerCase().indexOf(query) > -1);
   }
 }

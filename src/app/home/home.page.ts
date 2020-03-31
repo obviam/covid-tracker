@@ -25,4 +25,7 @@ export class HomePage implements OnInit {
     return this.appService.getAllData().slice(0, 15);
   }
 
+  onSearchInput(event: any) {
+    this.countries = this.appService.filterCountries(event.target.value);
+  }
 }

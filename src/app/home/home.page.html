@@ -14,7 +14,11 @@
   </ion-header>
 
   <ion-list>
-        <!-- <ion-searchbar showCancelButton="focus"></ion-searchbar> -->
+        <ion-searchbar 
+          placeholder="Country"
+          (ionInput)="onSearchInput($event)"
+          (ionCancel)="onSearchCancel($event)">
+        </ion-searchbar>
 
         <ion-item *ngFor = "let country of countries">
           <ion-avatar slot="start">
