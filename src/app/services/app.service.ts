@@ -44,11 +44,11 @@ export class AppService {
   }
 
   /* get the latest data for each country */
-  getTopInfected(top = 10) {
+  getInfected(top?: number) {
     console.log('getting infected');
     return [...this.cachedData].sort((a, b) => {
       return b.latestData.confirmed - a.latestData.confirmed;
-    }).slice(0, top);
+    }).slice(0, top ? top : this.cachedData.length);
   }
 
   getLatestDataForCountry(country: string) {

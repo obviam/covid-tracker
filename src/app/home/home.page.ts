@@ -16,13 +16,9 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     console.log('Refreshing');
     this.appService.refreshData(() => {
-      this.countries = this.appService.getTopInfected();
+      this.countries = this.appService.getInfected();
     });
     console.log(this.countries);
-  }
-
-  getTopInfected() {
-    return this.appService.getTopInfected(100);
   }
 
   getCountriesData() {
