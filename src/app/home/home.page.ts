@@ -15,7 +15,7 @@ export class HomePage implements OnInit {
   }
 
   getTopInfected() {
-    return this.appService.getTopInfected();
+    return this.appService.getTopInfected(100);
   }
 
   getCountriesData() {

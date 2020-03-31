@@ -29,13 +29,6 @@ export class AppService {
             countryData.countryName = country.name;
             countryData.dailyData = resp[country.name];
             countryData.latestData = resp[country.name][resp[country.name].length - 1];
-            countryData.totalData = resp[country.name].reduce((prevValue: InfectionData, curValue: InfectionData) => {
-              const totalData = new InfectionData();
-              totalData.confirmed = prevValue.confirmed + curValue.confirmed;
-              totalData.deaths = prevValue.deaths + curValue.deaths;
-              totalData.recovered = prevValue.recovered + curValue.recovered;
-              return totalData;
-            });
             this.cachedData.push(countryData);
           }
         });
@@ -50,7 +43,7 @@ export class AppService {
   /* get the latest data for each country */
   getTopInfected(top = 10) {
     return this.cachedData.sort((a, b) => {
-      return b.totalData.confirmed - a.totalData.confirmed;
+      return b.latestData.confirmed - a.latestData.confirmed;
     }).slice(0, top);
   }
 
