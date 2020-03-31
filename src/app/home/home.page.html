@@ -16,7 +16,7 @@
   <ion-list>
         <ion-searchbar showCancelButton="focus"></ion-searchbar>
 
-        <ion-item *ngFor = "let country of getCountriesData()">
+        <ion-item *ngFor = "let country of getTopInfected()">
           <ion-avatar slot="start">
             <img src="../assets/images/flags/svg/{{country.country}}.svg">
           </ion-avatar>
@@ -24,15 +24,15 @@
             <h2>{{country.countryName}}</h2>
             <ion-chip color="danger">
               <ion-icon name="medkit"></ion-icon>
-              <ion-label>{{country.latestData.confirmed}}</ion-label>
+              <ion-label>{{country.latestData.confirmed | number}}</ion-label>
             </ion-chip>
             <ion-chip>
               <ion-icon name="skull"></ion-icon>
-              <ion-label>{{country.latestData.deaths}}</ion-label>
+              <ion-label>{{country.latestData.deaths | number}}</ion-label>
             </ion-chip>
             <ion-chip color="success">
               <ion-icon name="happy"></ion-icon>
-              <ion-label>{{country.latestData.recovered}}</ion-label>
+              <ion-label>{{country.latestData.recovered | number}}</ion-label>
             </ion-chip>
           </ion-label>
         </ion-item>

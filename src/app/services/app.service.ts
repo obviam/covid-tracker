@@ -20,7 +20,7 @@ export class AppService {
 
   refreshData() {
     this.cachedData = [];
-    this.http.get<{string: InfectionData[]}>('https://pomber.github.io/covid19/timeseries.json').subscribe(
+    this.http.get<{ string: InfectionData[] }>('https://pomber.github.io/covid19/timeseries.json').subscribe(
       resp => {
         countries.forEach(country => {
           if (resp[country.name]) {
@@ -29,6 +29,13 @@ export class AppService {
             countryData.countryName = country.name;
             countryData.dailyData = resp[country.name];
             countryData.latestData = resp[country.name][resp[country.name].length - 1];
+            countryData.totalData = resp[country.name].reduce((prevValue: InfectionData, curValue: InfectionData) => {
+              const totalData = new InfectionData();
+              totalData.confirmed = prevValue.confirmed + curValue.confirmed;
+              totalData.deaths = prevValue.deaths + curValue.deaths;
+              totalData.recovered = prevValue.recovered + curValue.recovered;
+              return totalData;
+            });
             this.cachedData.push(countryData);
           }
         });
@@ -41,7 +48,10 @@ export class AppService {
   }
 
   /* get the latest data for each country */
-  getLatestData() {
+  getTopInfected(top = 10) {
+    return this.cachedData.sort((a, b) => {
+      return b.totalData.confirmed - a.totalData.confirmed;
+    }).slice(0, top);
   }
 
   getLatestDataForCountry(country: string) {
