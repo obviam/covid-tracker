@@ -24,15 +24,15 @@
             <h2>{{country.countryName}}</h2>
             <ion-chip color="danger">
               <ion-icon name="medkit"></ion-icon>
-              <ion-label>{{country.latestData.confirmed | thousandSuff : 2 }}</ion-label>
+              <ion-label>{{country.latestData.confirmed | thousandSuff : 1 }}</ion-label>
             </ion-chip>
             <ion-chip>
               <ion-icon name="skull"></ion-icon>
-              <ion-label>{{country.latestData.deaths | thousandSuff : 2 }}</ion-label>
+              <ion-label>{{country.latestData.deaths | thousandSuff : 1 }}</ion-label>
             </ion-chip>
             <ion-chip color="success">
               <ion-icon name="happy"></ion-icon>
-              <ion-label>{{country.latestData.recovered | thousandSuff : 2 }}</ion-label>
+              <ion-label>{{country.latestData.recovered | thousandSuff : 1 }}</ion-label>
             </ion-chip>
           </ion-label>
         </ion-item>
