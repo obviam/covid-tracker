@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "preinstall": "npx npm-force-resolutions"
   },
   "private": true,
   "dependencies": {
@@ -51,5 +52,8 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
+  }
 }
