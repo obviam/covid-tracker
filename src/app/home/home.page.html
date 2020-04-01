@@ -20,7 +20,7 @@
           (ionCancel)="onSearchCancel($event)">
         </ion-searchbar>
 
-        <ion-item *ngFor = "let country of countries">
+        <ion-item [routerLink]="'/countries/' + country.country"  *ngFor="let country of countries">
           <ion-avatar slot="start">
             <img src="../assets/images/flags/svg/{{country.country}}.svg">
           </ion-avatar>
