@@ -53,6 +53,6 @@ export class AppService {
   filterCountries(query: string) {
     return [...this.cachedData].sort((a, b) => {
       return b.latestData.confirmed - a.latestData.confirmed;
-    }).filter(country => country.countryName.toLowerCase().indexOf(query) > -1);
+    }).filter(country => country.countryName.toLowerCase().indexOf(query.toLowerCase()) > -1);
   }
 }
