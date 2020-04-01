@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-country',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CountryPage implements OnInit {
 
-  constructor() { }
+  countryCode: string;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.countryCode = this.route.snapshot.paramMap.get('code');
+    console.log(`Country: ${this.countryCode}`);
+    // process country data
   }
 
 }
