@@ -18,7 +18,7 @@ export class AppService {
     return countries;
   }
 
-  refreshData(callback?: any) {
+  refreshData(callback?: any, ...args: any[]) {
     this.cachedData = [];
     // this.http.get<{ string: InfectionData[] }>('https://pomber.github.io/covid19/timeseries.json').subscribe(
     this.http.get<{ string: InfectionData[] }>('assets/covid.json').subscribe(
@@ -34,10 +34,14 @@ export class AppService {
           }
         });
         if (callback) {
-          callback();
+          callback(...args);
         }
       }
     );
+  }
+
+  isLoaded() {
+    return this.cachedData.length !== 0;
   }
 
   getAllData() {
@@ -58,9 +62,6 @@ export class AppService {
   }
 
   getCountry(code: string) {
-    if (this.cachedData.length === 0) {
-      this.refreshData();
-    }
-    return [...this.cachedData].find(country => country.country = code);
+    return [...this.cachedData].find(country => country.country === code);
   }
 }
