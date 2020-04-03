@@ -18,7 +18,6 @@ export class HomePage implements OnInit {
     this.appService.refreshData(() => {
       this.countries = this.appService.getInfected();
     });
-    console.log(this.countries);
   }
 
   getCountriesData() {

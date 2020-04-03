@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 export class AppService {
 
   // lastDownloaded
-  cachedData: Array<CountryData>;
+  cachedData: Array<CountryData> = [];
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +20,8 @@ export class AppService {
 
   refreshData(callback?: any) {
     this.cachedData = [];
-    this.http.get<{ string: InfectionData[] }>('https://pomber.github.io/covid19/timeseries.json').subscribe(
+    // this.http.get<{ string: InfectionData[] }>('https://pomber.github.io/covid19/timeseries.json').subscribe(
+    this.http.get<{ string: InfectionData[] }>('assets/covid.json').subscribe(
       resp => {
         countries.forEach(country => {
           if (resp[country.name]) {
@@ -54,5 +55,12 @@ export class AppService {
     return [...this.cachedData].sort((a, b) => {
       return b.latestData.confirmed - a.latestData.confirmed;
     }).filter(country => country.countryName.toLowerCase().indexOf(query.toLowerCase()) > -1);
+  }
+
+  getCountry(code: string) {
+    if (this.cachedData.length === 0) {
+      this.refreshData();
+    }
+    return [...this.cachedData].find(country => country.country = code);
   }
 }
