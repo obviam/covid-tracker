@@ -4,6 +4,7 @@ import { AppService } from './../../services/app.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-country',
@@ -16,7 +17,7 @@ export class CountryPage implements OnInit {
 
   private lineChart: Chart;
 
-  private countryData: CountryData;
+  countryData: CountryData;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +25,9 @@ export class CountryPage implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     const countryCode = this.route.snapshot.paramMap.get('code');
     if (!this.appService.isLoaded()) {
       this.router.navigate(['/home']);
@@ -36,11 +40,12 @@ export class CountryPage implements OnInit {
   populateData(countryCode: string) {
     this.countryData = this.appService.getCountry(countryCode);
     const tmpDailyData = [...this.countryData.dailyData];
-    const rolling7Days = [];
-    while (tmpDailyData && tmpDailyData.length > 7) {
-      rolling7Days.push(Array.from(tmpDailyData.splice(tmpDailyData.length - 7)));
-    }
-    rolling7Days.reverse(); // it's in place
+    // reverse the array so the last 7 days will be complete
+    const rolling7Days = _.chain(tmpDailyData)
+      .reverse()
+      .chunk(7)
+      .reverse()
+      .value();
 
     const rolledUpData: Array<InfectionData> = [];
     rolling7Days.forEach(sevenDayData => {
@@ -58,9 +63,13 @@ export class CountryPage implements OnInit {
       infectionData.confirmed = confirmed;
       infectionData.deaths = deaths;
       infectionData.recovered = recovered;
-      infectionData.date = (weekData.pop() as InfectionData).date;
+      // since each sub-array is reversed, the first element is the most recent
+      infectionData.date = _.head(weekData).date;
       rolledUpData.push(infectionData);
     });
+
+    // splice it in place
+    // rolledUpData.splice(0, rolledUpData.length - 8);
 
     console.log(rolledUpData);
 
