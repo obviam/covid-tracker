@@ -9,8 +9,9 @@ const routes: Routes = [
     loadChildren: () => import('./coutries/country/country.module').then( m => m.CountryPageModule)
   },
   {
-    path: '**',
-    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+    path: '**', redirectTo: 'home', pathMatch: 'full'
+    // path: '**',
+    // loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
 ];
 
