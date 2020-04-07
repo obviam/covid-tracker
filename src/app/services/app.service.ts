@@ -3,6 +3,8 @@ import { CountryData } from './../model/country-data.model';
 import { HttpClient } from '@angular/common/http';
 import { countries } from './../../data/countries';
 import { Injectable } from '@angular/core';
+import * as _ from 'lodash';
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,22 @@ export class AppService {
             countryData.countryName = country.name;
             countryData.dailyData = resp[country.name];
             countryData.latestData = resp[country.name][resp[country.name].length - 1];
+            const dailyChangeData: Array<InfectionData> = [];
+            _.each(countryData.dailyData, (dailyData, idx) => {
+              const dailyChange = new InfectionData();
+              dailyChange.confirmed = 0;
+              dailyChange.deaths = 0;
+              dailyChange.recovered = 0;
+              dailyChange.date = dailyData.date;
+              if (idx > 0) {
+                dailyChange.confirmed = dailyData.confirmed - countryData.dailyData[idx - 1].confirmed;
+                dailyChange.deaths = dailyData.deaths - countryData.dailyData[idx - 1].deaths;
+                dailyChange.recovered = dailyData.recovered - countryData.dailyData[idx - 1].recovered;
+              }
+              dailyChangeData.push(dailyChange);
+            });
+            countryData.dailyChangeData = dailyChangeData;
+            countryData.latestDailyChangeData = _.last([...dailyChangeData]);
             this.cachedData.push(countryData);
           }
         });

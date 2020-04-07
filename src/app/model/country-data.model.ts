@@ -5,4 +5,6 @@ export class CountryData {
     countryName: string;
     latestData: InfectionData;
     dailyData: Array<InfectionData>;
+    dailyChangeData: Array<InfectionData>;
+    latestDailyChangeData: InfectionData;
 }
