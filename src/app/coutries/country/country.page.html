@@ -1,20 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{countryData?.countryName}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
-    <canvas #lineCanvas></canvas>
-    <ion-item scrollX="true">
-    </ion-item>
     <ion-card>
       <ion-card-header>
-        Line Chart
+        COVID-19 Data
       </ion-card-header>
       <ion-card-content>
+
       </ion-card-content>
     </ion-card>
+    <canvas #lineCanvas></canvas>
   </div>
 </ion-content>
