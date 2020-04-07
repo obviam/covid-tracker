@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>country</ion-title>
+    <ion-title>{{countryData?.countryName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="ion-padding">
+    <canvas #lineCanvas></canvas>
     <ion-item scrollX="true">
-      <canvas #lineCanvas></canvas>
     </ion-item>
     <ion-card>
       <ion-card-header>
