@@ -71,8 +71,6 @@ export class CountryPage implements OnInit {
     // splice it in place
     // rolledUpData.splice(0, rolledUpData.length - 8);
 
-    console.log(rolledUpData);
-
     const confirmedSeries = this.countryData.dailyData.map(data => data.confirmed).filter(data => data > 0);
     const xLabels = this.countryData.dailyData.map(data => data.date)
       .splice(this.countryData.dailyData.length - confirmedSeries.length);
