@@ -22,8 +22,8 @@ export class AppService {
 
   refreshData(callback?: any, ...args: any[]) {
     this.cachedData = [];
-    // this.http.get<{ string: InfectionData[] }>('https://pomber.github.io/covid19/timeseries.json').subscribe(
-    this.http.get<{ string: InfectionData[] }>('assets/covid.json').subscribe(
+    this.http.get<{ string: InfectionData[] }>('https://pomber.github.io/covid19/timeseries.json').subscribe(
+    // this.http.get<{ string: InfectionData[] }>('assets/covid.json').subscribe(
       resp => {
         countries.forEach(country => {
           if (resp[country.name]) {
