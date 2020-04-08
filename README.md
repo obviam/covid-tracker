@@ -36,6 +36,8 @@ Open the browser at [http://localhost:8100](http://localhost:8100)
 ionic build
 ```
 
+The built website will be under the `www` directory.
+
 In case of errors, try running:
 
 ```bash
