@@ -1,8 +1,14 @@
 # COVID-19 Radar
 
-Covid-19 Radar is a responsive web-app, soon to be PWA that visualises COVID-19 cases around the world.
+Covid-19 Radar is a mobile first responsive web-app, soon to be PWA that visualises COVID-19 cases around the world.
 
 The application is built using the [Ionic framework](https://ionicframework.com/) with [Angular](https://angular.io/)
+
+## Demo
+
+A live version can be found here: [https://covid19-radar.netlify.app/](https://covid19-radar.netlify.app/)
+
+Best viewed on a phone.
 
 ## Building and Running Locally
 
