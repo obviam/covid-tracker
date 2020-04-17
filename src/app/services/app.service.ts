@@ -20,18 +20,18 @@ export class AppService {
     return countries;
   }
 
-  refreshData(callback?: any, ...args: any[]) {
+  async refreshData(): Promise<any> {
     this.cachedData = [];
-    this.http.get<{ string: InfectionData[] }>('https://pomber.github.io/covid19/timeseries.json').subscribe(
-    // this.http.get<{ string: InfectionData[] }>('assets/covid.json').subscribe(
-      resp => {
+    await this.http.get<{ string: InfectionData[] }>('https://pomber.github.io/covid19/timeseries.json').toPromise().then(
+    // await this.http.get<{ string: InfectionData[] }>('assets/covid.json').toPromise().then(
+      res => {
         countries.forEach(country => {
-          if (resp[country.name]) {
+          if (res[country.name]) {
             const countryData = new CountryData();
             countryData.country = country.country;
             countryData.countryName = country.name;
-            countryData.dailyData = resp[country.name];
-            countryData.latestData = resp[country.name][resp[country.name].length - 1];
+            countryData.dailyData = res[country.name];
+            countryData.latestData = res[country.name][res[country.name].length - 1];
             const dailyChangeData: Array<InfectionData> = [];
             _.each(countryData.dailyData, (dailyData, idx) => {
               const dailyChange = new InfectionData();
@@ -51,11 +51,14 @@ export class AppService {
             this.cachedData.push(countryData);
           }
         });
-        if (callback) {
-          callback(...args);
-        }
+        console.log('done');
+        return [...this.cachedData];
       }
     );
+    if (this.cachedData.length === 0) {
+      return Promise.reject('Could not fetch data');
+    }
+    return Promise.resolve('done');
   }
 
   isLoaded() {
