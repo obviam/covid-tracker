@@ -46,6 +46,13 @@ npm install
 ionic build
 ```
 
+## Dependencies & Credits
+
+* [Ionic](https://ionicframework.com/)
+* [Lodash](https://lodash.com/)
+* Flags from [https://github.com/hjnilsson/country-flags](https://github.com/hjnilsson/country-flags)
+* Covid-19 data from [https://pomber.github.io/covid19/timeseries.json](https://pomber.github.io/covid19/timeseries.json)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
