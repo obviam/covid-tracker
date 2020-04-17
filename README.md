@@ -15,7 +15,7 @@ Best viewed on a phone.
 ### Install dependencies
 
 * [npm](https://www.npmjs.com)
-  * It comes installed withof [Node.js](https://nodejs.org)
+  * It comes installed with [Node.js](https://nodejs.org)
 * [Ionic](https://ionicframework.com/)
   * Usually via npm by running
     * `npm install -g @ionic/cli`
